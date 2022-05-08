@@ -10,7 +10,7 @@ console.log("Welcome to FakeTwitter!")
 document.title = "🐦️ FakeTwitter"
 
 const user = {
-	loggedIn: true
+	loggedIn: false
 }
 
 </script>

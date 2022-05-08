@@ -4,9 +4,9 @@
 		<nav class="navbar is-dark">
 
 			<div class="navbar-brand">
-				<a href="/" class="content navbar-item">
+				<router-link :to="{name: 'Home'}" class="content navbar-item">
 					<span class="title is-5 has-text-white">🐦️ FakeTwitter</span>
-				</a>
+				</router-link>
 			</div>
 
 			<div class="navbar-menu">
@@ -23,7 +23,7 @@
 							<a class="button is-dark signupButton">
 								<strong>Sign up</strong>
 							</a>
-							<a class="button is-dark loginButton">Log in</a>
+							<router-link :to="{name: 'Login'}" class="button is-dark loginButton">Login</router-link>
 						</div>
 						
 						<div v-else>
