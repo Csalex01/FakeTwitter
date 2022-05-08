@@ -13,7 +13,7 @@
 				<div class="navbar-start">
 					<div class="navbar-item search">
 						<input type="text" name="Search" class="input has-text-white" id="searchBar" placeholder="Search">
-						<a href="#" class="button is-dark searchButton">Submit</a>
+						<a href="#" class="button is-dark searchButton">Search</a>
 					</div>
 				</div>
 

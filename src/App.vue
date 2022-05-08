@@ -3,14 +3,32 @@
 	<RouterView />
 </template>
 
-<script setup>
+<script>
 import Navbar from "./components/Navbar.vue"
 
-console.log("Welcome to FakeTwitter!")
-document.title = "🐦️ FakeTwitter"
+import { useRouter } from "vue-router"
 
-const user = {
-	loggedIn: false
+export default {
+	components: {
+		Navbar
+	},
+	setup() {
+		console.log("Welcome to FakeTwitter!")
+		document.title = "🐦️ FakeTwitter"
+
+		const user = {
+			loggedIn: false
+		}
+
+		const router = useRouter()
+
+		if (!user.loggedIn)
+			router.push({ name: "Login" })
+
+		return {
+			user
+		}
+	}
 }
 
 </script>

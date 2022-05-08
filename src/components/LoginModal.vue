@@ -9,7 +9,7 @@
 					<span class="icon">
 						<i class="fa-solid fa-envelope"></i>
 					</span>
-					<input type="text" class="input" placeholder="E-mail">
+					<input type="email" class="input validate" placeholder="E-mail">
 				</div>
 			</div>
 
@@ -24,6 +24,7 @@
 			</div>
 		</form>
 
+		<a class="signup has-text-primary">Don't have an account? Sign up!</a>
 		<a class="resetPassword has-text-danger">Reset Password</a>
 
 		<div class="buttons">
@@ -73,8 +74,10 @@
 	color: rgba(100, 100, 100, 1);
 }
 
-.resetPassword {
+.resetPassword,
+.signup {
 	display: inline-block;
-	margin-top: 20px;
+	margin-top: 10px;
+	margin-left: 10px;
 }
 </style>
