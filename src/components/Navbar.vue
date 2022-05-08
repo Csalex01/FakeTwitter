@@ -42,8 +42,6 @@
 
 const props = defineProps(["user"])
 
-console.log(props.user)
-
 </script>
 
 <style scoped>

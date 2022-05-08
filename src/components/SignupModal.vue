@@ -9,7 +9,7 @@
 					<span class="icon">
 						<i class="fa-solid fa-envelope"></i>
 					</span>
-					<input type="email" class="input" placeholder="E-mail Address">
+					<input type="email" class="input" placeholder="E-mail Address" v-model="form.email">
 				</div>
 			</div>
 
@@ -19,7 +19,7 @@
 					<span class="icon">
 						<i class="fa-solid fa-at"></i>
 					</span>
-					<input type="text" class="input" placeholder=" Username">
+					<input type="text" class="input" placeholder=" Username" v-model="form.username">
 				</div>
 			</div>
 
@@ -29,14 +29,8 @@
 					<span class="icon">
 						<i class="fa-solid fa-key"></i>
 					</span>
-					<input type="password" class="input" placeholder="Password">
+					<input type="password" class="input" placeholder="Password" v-model="form.password" @keyup="validatePassword">
 				</div>
-				<p class="passwordInfo has-text-grey is-size-7">
-					<strong class="has-text-grey">Password requirements</strong> <br>
-					- Minimum 6 characters, <br>
-					- Must contain at least one UPPERCASE letter (A-Z), <br>
-					- Must contain at least one number (0-9).
-				</p>
 			</div>
 
 			<div class="field">
@@ -45,21 +39,72 @@
 					<span class="icon">
 						<i class="fa-solid fa-key"></i>
 					</span>
-					<input type="password" class="input" placeholder="Password">
+					<input type="password" class="input" placeholder="Confirm Password" v-model="form.confirmPassword" @keyup="validatePassword">
 				</div>
 			</div>
+			<!-- <p class=" has-text-danger is-size-7" v-if="form.password != form.confirmPassword">
+				Passwords must match!
+			</p> -->
+			<p class="passwordInfo has-text-grey is-size-7">
+				<strong class="has-text-grey">Password requirements</strong> <br>
+				{{ criteria[0] ? '🟩' : '🟥' }} Minimum 6 characters <br>
+				{{ criteria[1] ? '🟩' : '🟥' }} Must contain at least one UPPERCASE letter (A-Z) <br>
+				{{ criteria[2] ? '🟩' : '🟥' }} Must contain at least one number (0-9) <br>
+				{{ criteria[3] ? '🟩' : '🟥' }} Passwords must match
+			</p>
 		</form>
 
 		<a class="login has-text-primary">Already have an account? Log in!</a>
 
 		<div class="buttons">
-			<a class="button is-primary">Sign up</a>
+			<a class="button is-primary" @click="signup">Sign up</a>
 		</div>
 
 	</div>
 </template>
 
-<script>
+<script setup>
+
+import { computed, reactive, ref } from 'vue';
+
+const form = reactive({
+	email: "",
+	username: "",
+	password: "",
+	confirmPassword: ""
+})
+
+let criteria = reactive([false, false, false, false])
+
+const validatePassword = () => {
+	// console.log(`Password: ${form.password}\nConfirm Password: ${form.confirmPassword}`);
+
+	criteria[0] = form.password.length >= 6
+	criteria[3] = form.password == form.confirmPassword && form.password.length > 0 && form.confirmPassword.length > 0
+
+	criteria[1] = false
+	criteria[2] = false
+
+	for (let c of form.password)
+		if (c == c.toUpperCase() && !"0123456789".includes(c)) {
+			criteria[1] = true
+			break
+		}
+
+	for (let c of form.password)
+		if ("0123456789".includes(c)) {
+			criteria[2] = true
+			break
+		}
+
+}
+
+const signup = () => {
+	console.log(`E-mail: ${form.email}`)
+	console.log(`Username: ${form.username}`)
+	console.log(`Password: ${form.password}`)
+
+}
 
 </script>
 
@@ -108,5 +153,6 @@
 
 .passwordInfo {
 	margin-top: 10px;
+	margin-bottom: 10px;
 }
 </style>
