@@ -13,14 +13,13 @@ export default {
 		Navbar
 	},
 	setup() {
-		console.log("Welcome to FakeTwitter!")
-		document.title = "🐦️ FakeTwitter"
-
+		const router = useRouter()
 		const user = {
-			loggedIn: false
+			loggedIn: true
 		}
 
-		const router = useRouter()
+		console.log("Welcome to FakeTwitter!")
+		document.title = "🐦️ FakeTwitter"
 
 		if (!user.loggedIn)
 			router.push({ name: "Login" })

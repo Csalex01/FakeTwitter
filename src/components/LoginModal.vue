@@ -4,12 +4,12 @@
 
 		<form>
 			<div class="field">
-				<div class="label">E-mail</div>
+				<div class="label">E-mail Address</div>
 				<div class="control has-icons-left">
 					<span class="icon">
 						<i class="fa-solid fa-envelope"></i>
 					</span>
-					<input type="email" class="input validate" placeholder="E-mail">
+					<input type="email" class="input" placeholder="E-mail Address">
 				</div>
 			</div>
 

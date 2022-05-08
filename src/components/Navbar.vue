@@ -20,9 +20,9 @@
 				<div class="navbar-end">
 					<div class="navbar-item">
 						<div class="buttons" v-if="!user.loggedIn">
-							<a class="button is-dark signupButton">
+							<router-link :to="{name: 'Signup'}" class="button is-dark signupButton">
 								<strong>Sign up</strong>
-							</a>
+							</router-link>
 							<router-link :to="{name: 'Login'}" class="button is-dark loginButton">Login</router-link>
 						</div>
 						
