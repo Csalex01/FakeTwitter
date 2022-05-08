@@ -15,14 +15,14 @@ export default {
 	setup() {
 		const router = useRouter()
 		const user = {
-			loggedIn: true
+			loggedIn: false
 		}
 
 		console.log("Welcome to FakeTwitter!")
 		document.title = "🐦️ FakeTwitter"
 
-		if (!user.loggedIn)
-			router.push({ name: "Login" })
+		// if (!user.loggedIn)
+		// 	router.push({ name: "Login" })
 
 		return {
 			user
