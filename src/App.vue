@@ -4,9 +4,10 @@
 </template>
 
 <script>
-import Navbar from "./components/Navbar.vue"
+import Navbar from "./components/navigation/Navbar.vue"
 
 import { useRouter } from "vue-router"
+import { user } from "./main"
 
 export default {
 	components: {
@@ -14,14 +15,13 @@ export default {
 	},
 	setup() {
 		const router = useRouter()
-		const user = {
-			loggedIn: false
-		}
 
 		document.title = "🐦️ FakeTwitter"
 
 		if (!user.loggedIn)
 			router.push({ name: "Login" })
+		else
+			router.push({ name: "Home" })
 
 		return {
 			user

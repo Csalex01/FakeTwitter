@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import SignupModal from "../components/SignupModal.vue"
+import SignupModal from "../components/auth/SignupModal.vue"
 </script>
 
 <style>

@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import LoginModal from "../components/LoginModal.vue"
+import LoginModal from "../components/auth/LoginModal.vue"
 </script>
 
 <style>

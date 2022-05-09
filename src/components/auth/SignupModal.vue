@@ -2,7 +2,7 @@
 	<div class="box has-text-white">
 		<h1 class="title is-3 has-text-white">Sign Up</h1>
 
-		<form>
+		<form @keyup="validateForm">
 			<div class="field">
 				<div class="label">E-mail Address</div>
 				<div class="control has-icons-left">
@@ -12,6 +12,8 @@
 					<input type="email" class="input" placeholder="E-mail Address" v-model="form.email">
 				</div>
 			</div>
+
+			<p class="has-text-danger is-size-7" v-if="!emailCriteria.isValid">❌ This field is required!</p>
 
 			<div class="field">
 				<div class="label">Username</div>
@@ -23,13 +25,15 @@
 				</div>
 			</div>
 
+			<p class="has-text-danger is-size-7" v-if="!usernameCriteria.isValid">❌ This field is required!</p>
+
 			<div class="field">
 				<div class="label">Password</div>
 				<div class="control has-icons-left">
 					<span class="icon">
 						<i class="fa-solid fa-key"></i>
 					</span>
-					<input type="password" class="input" placeholder="Password" v-model="form.password" @keyup="validatePassword">
+					<input type="password" class="input" placeholder="Password" v-model="form.password">
 				</div>
 			</div>
 
@@ -39,18 +43,16 @@
 					<span class="icon">
 						<i class="fa-solid fa-key"></i>
 					</span>
-					<input type="password" class="input" placeholder="Confirm Password" v-model="form.confirmPassword" @keyup="validatePassword">
+					<input type="password" class="input" placeholder="Confirm Password" v-model="form.confirmPassword">
 				</div>
 			</div>
-			<!-- <p class=" has-text-danger is-size-7" v-if="form.password != form.confirmPassword">
-				Passwords must match!
-			</p> -->
+
 			<p class="passwordInfo has-text-grey is-size-7">
 				<strong class="has-text-grey">Password requirements</strong> <br>
-				{{ criteria[0] ? '🟩' : '🟥' }} Minimum 6 characters <br>
-				{{ criteria[1] ? '🟩' : '🟥' }} Must contain at least one UPPERCASE letter (A-Z) <br>
-				{{ criteria[2] ? '🟩' : '🟥' }} Must contain at least one number (0-9) <br>
-				{{ criteria[3] ? '🟩' : '🟥' }} Passwords must match
+				{{ passwordCriteria[0] ? '🟩' : '🟥' }} Minimum 6 characters <br>
+				{{ passwordCriteria[1] ? '🟩' : '🟥' }} Must contain at least one UPPERCASE letter (A-Z) <br>
+				{{ passwordCriteria[2] ? '🟩' : '🟥' }} Must contain at least one number (0-9) <br>
+				{{ passwordCriteria[3] ? '🟩' : '🟥' }} Passwords must match
 			</p>
 		</form>
 
@@ -65,7 +67,7 @@
 
 <script setup>
 
-import { computed, reactive, ref } from 'vue';
+import { reactive} from 'vue';
 
 const form = reactive({
 	email: "",
@@ -74,36 +76,36 @@ const form = reactive({
 	confirmPassword: ""
 })
 
-let criteria = reactive([false, false, false, false])
+let emailCriteria = reactive({isValid: true})
+let usernameCriteria = reactive({isValid: true})
+let passwordCriteria = reactive([false, false, false, false])
 
-const validatePassword = () => {
-	// console.log(`Password: ${form.password}\nConfirm Password: ${form.confirmPassword}`);
+const validateForm = () => {
 
-	criteria[0] = form.password.length >= 6
-	criteria[3] = form.password == form.confirmPassword && form.password.length > 0 && form.confirmPassword.length > 0
+	passwordCriteria[0] = form.password.length >= 6
+	passwordCriteria[3] = form.password == form.confirmPassword && form.password.length > 0 && form.confirmPassword.length > 0
 
-	criteria[1] = false
-	criteria[2] = false
+	passwordCriteria[1] = false
 
 	for (let c of form.password)
 		if (c == c.toUpperCase() && !"0123456789".includes(c)) {
-			criteria[1] = true
+			passwordCriteria[1] = true
 			break
 		}
+
+	passwordCriteria[2] = false
 
 	for (let c of form.password)
 		if ("0123456789".includes(c)) {
-			criteria[2] = true
+			passwordCriteria[2] = true
 			break
 		}
-
+		
 }
 
 const signup = () => {
-	console.log(`E-mail: ${form.email}`)
-	console.log(`Username: ${form.username}`)
-	console.log(`Password: ${form.password}`)
-
+	emailCriteria.isValid = form.email.length > 0
+	usernameCriteria.isValid = form.username.length > 0
 }
 
 </script>
@@ -125,7 +127,6 @@ const signup = () => {
 
 	background: rgba(51, 51, 51, 1);
 }
-
 .buttons {
 	margin: 20px 0 0 0;
 }
@@ -153,6 +154,10 @@ const signup = () => {
 
 .passwordInfo {
 	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.has-text-danger {
 	margin-bottom: 10px;
 }
 </style>

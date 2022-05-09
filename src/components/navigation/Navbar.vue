@@ -1,7 +1,7 @@
 <template>
 
 	<div class="box">
-		<nav class="navbar is-dark">
+		<nav class="navbar is-dark is-fixed-top">
 
 			<div class="navbar-brand">
 				<router-link :to="{name: 'Home'}" class="content navbar-item">
