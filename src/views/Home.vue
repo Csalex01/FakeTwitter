@@ -12,17 +12,10 @@
 	</div>
 </template>
 
-<script>
+<script setup>
 import { onBeforeMount } from "vue";
 import PostCard from "../components/posts/PostCard.vue"
-
-export default {
-	name: "Home",
-	props: { user },
-	setup() {
-
-	}
-}
+import { user } from "../main"
 </script>
 
 <style scoped>
